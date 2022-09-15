@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export function CountriesList(props) {
     const {countriesDB} = props
 
@@ -7,7 +9,7 @@ export function CountriesList(props) {
             <div className="col-5" style={{maxHeight: "90vh", overflow: "scroll"}}>
                 <div className="list-group">
                     {countriesDB.map((currentCountry) => {
-                        return <a className="list-group-item list-group-item-action" href={currentCountry.alpha3Code}>{currentCountry.name.common}</a>
+                        return <Link className="list-group-item list-group-item-action" to={currentCountry.alpha3Code}>{currentCountry.name.common}</Link>
                     })}
                 </div>
             </div>

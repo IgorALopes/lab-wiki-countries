@@ -1,18 +1,29 @@
-export function CountryDetails() {
+import { useParams } from "react-router-dom";
+
+export function CountryDetails(props) {
+    const {countriesDB} = props
+
+    const {alpha3Code} = useParams()
+
+    const country = countriesDB.filter((c) => {
+        return c.alpha3Code === alpha3Code    
+    })
+
+    console.log(country)
     return (
     <div className="col-7">
-        <h1>France</h1>
+        <h1>{country[0].name.common}</h1>
         <table className="table">
             <thead></thead>
             <tbody>
                 <tr>
                     <td style={{width: "30%"}}>Capital</td>
-                    <td>Paris</td>
+                    <td>{country[0].capital}</td>
                 </tr>
                 <tr>
                     <td>Area</td>
                     <td>
-                    551695 km
+                    {country[0].area} km
                     <sup>2</sup>
                     </td>
                 </tr>
@@ -20,14 +31,12 @@ export function CountryDetails() {
                     <td>Borders</td>
                     <td>
                     <ul style={{listStyle: "none"}}>
-                        <li><a href="/AND">Andorra</a></li>
-                        <li><a href="/BEL">Belgium</a></li>
-                        <li><a href="/DEU">Germany</a></li>
-                        <li><a href="/ITA">Italy</a></li>
-                        <li><a href="/LUX">Luxembourg</a></li>
-                        <li><a href="/MCO">Monaco</a></li>
-                        <li><a href="/ESP">Spain</a></li>
-                        <li><a href="/CHE">Switzerland</a></li>
+                        {country[0].borders.map((currentBorder) => {
+                            return <li><a href={currentBorder}>
+                                {countriesDB.filter((currentCountry) => countriesDB.alpha3Code === currentBorder ? currentCountry.name.common
+                                )}
+                            </a></li>
+                        })}
                     </ul>
                     </td>
                 </tr>
